@@ -17,7 +17,7 @@ function defaultReport(details) {
         const itemSize = item.size || 0;
 
         console.log(
-            "%s - %s (%s%%)",
+            "  %s - %s (%s%%)",
             item.name,
             filesize(itemSize),
             ((itemSize / args.total) * 100).toFixed(2)
@@ -26,8 +26,8 @@ function defaultReport(details) {
         if(args.options.details) {
             args.data[item.name]
                 .sort((a, b) => b.size - a.size)
-                .forEach((file) => console.log(
-                    "\t%s - %s (%s%%)",
+                .forEach((file) => (item.size || !args.options.ignoreEmpty) && console.log(
+                    "    %s - %s (%s%%)",
                     file.path,
                     filesize(file.size || 0),
                     ((file.size / itemSize) * 100).toFixed(2)
