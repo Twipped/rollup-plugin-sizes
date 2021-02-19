@@ -16,6 +16,10 @@ function defaultReport(details) {
     args.totals.forEach((item) => {
         const itemSize = item.size || 0;
 
+        if(args.options.ignoreEmpty && item.size === 0) {
+            return;
+        }
+
         console.log(
             "  %s - %s (%s%%)",
             item.name,
@@ -105,7 +109,7 @@ module.exports = (options) => {
                         data[parsed.name] = [];
                     }
 
-                    data[parsed.name].push(Object.assign(parsed, { size : module.originalLength }));
+                    data[parsed.name].push(Object.assign(parsed, { size : module.renderedLength, originalSize : module.originalLength }));
                 });
 
                 // Sum all files in each chunk
