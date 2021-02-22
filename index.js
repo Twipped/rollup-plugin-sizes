@@ -30,7 +30,7 @@ function defaultReport(details) {
         if(args.options.details) {
             args.data[item.name]
                 .sort((a, b) => b.size - a.size)
-                .forEach((file) => (item.size || !args.options.ignoreEmpty) && console.log(
+                .forEach((file) => (file.size || !args.options.ignoreEmpty) && console.log(
                     "    %s - %s (%s%%)",
                     file.path,
                     filesize(file.size || 0),
